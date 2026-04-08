@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLP-1 Compare</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f5f7fb;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 16px;
+  background: black;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Best Online GLP-1 Providers</h1>
+
+<div class="card">
+<h2>Ro (Body Program)</h2>
+<p>Well-known telehealth platform with a streamlined signup process and strong brand trust.</p>
+<a href="https://ro.co" class="button">Get started</a>
+</div>
+
+<div class="card">
+<h2>Henry Meds</h2>
+<p>Popular option focused on affordability, often chosen by users looking for lower-cost access.</p>
+<a href="https://henrymeds.com" class="button">Get started</a>
+</div>
+
+<div class="card">
+<h2>Found</h2>
+<p>Combines medication options with coaching and support for a more guided experience.</p>
+<a href="https://joinfound.com" class="button">Get started</a>
+</div>
+
+<h2>How it works</h2>
+
+<div class="card">
+<p><strong>1. Compare providers</strong></p>
+<p>Review options based on price, process, and experience.</p>
+</div>
+
+<div class="card">
+<p><strong>2. Choose a provider</strong></p>
+<p>Select the provider that fits your needs and continue to their intake form.</p>
+</div>
+
+<div class="card">
+<p><strong>3. Get evaluated</strong></p>
+<p>A licensed healthcare provider reviews your information and determines eligibility.</p>
+</div>
+
+</div>
+
+</body>
+</html>

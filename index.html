@@ -1,914 +1,150 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GLP-1 Compare | Online Provider Comparison</title>
-  <meta
-    name="description"
-    content="Compare online GLP-1 providers by pricing, speed, and experience. Informational comparison only."
-  />
-  <style>
-    :root {
-      --bg: #f6f7fb;
-      --panel: rgba(255, 255, 255, 0.76);
-      --panel-strong: rgba(255, 255, 255, 0.92);
-      --text: #111827;
-      --muted: #667085;
-      --line: rgba(17, 24, 39, 0.08);
-      --shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
-      --shadow-strong: 0 18px 48px rgba(17, 24, 39, 0.12);
-      --accent: #111827;
-      --accent-2: #3b82f6;
-      --success: #0f766e;
-      --pill: #eef2ff;
-      --max: 1180px;
-      --radius-xl: 28px;
-      --radius-lg: 20px;
-      --radius-md: 14px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(59,130,246,0.08), transparent 24%),
-        radial-gradient(circle at top right, rgba(99,102,241,0.09), transparent 18%),
-        linear-gradient(180deg, #fbfcff 0%, #f5f7fb 100%);
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .shell {
-      width: min(var(--max), calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      backdrop-filter: blur(14px);
-      background: rgba(246, 247, 251, 0.75);
-      border-bottom: 1px solid rgba(17, 24, 39, 0.05);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 74px;
-    }
-
-    .brand {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #111827 0%, #344054 100%);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.14);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      padding: 12px 18px;
-      background: var(--accent);
-      color: white;
-      font-weight: 600;
-      font-size: 14px;
-      box-shadow: var(--shadow);
-    }
-
-    .hero {
-      padding: 72px 0 36px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 28px;
-      align-items: stretch;
-    }
-
-    .hero-card,
-    .glass,
-    .provider-card,
-    .info-card,
-    .faq-card,
-    .footer-card {
-      background: var(--panel);
-      border: 1px solid rgba(255,255,255,0.6);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-    }
-
-    .hero-card {
-      border-radius: var(--radius-xl);
-      padding: 42px;
-      min-height: 520px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      width: fit-content;
-      padding: 9px 14px;
-      border-radius: 999px;
-      background: var(--pill);
-      color: #3730a3;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 18px;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #4f46e5;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2.4rem, 6vw, 4.5rem);
-      line-height: 0.95;
-      letter-spacing: -0.045em;
-      max-width: 10ch;
-    }
-
-    .hero-copy {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.65;
-      max-width: 60ch;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 28px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 50px;
-      padding: 0 18px;
-      border-radius: 999px;
-      font-size: 15px;
-      font-weight: 600;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: var(--shadow);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.78);
-      color: var(--text);
-      border: 1px solid var(--line);
-    }
-
-    .hero-note {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .hero-side {
-      display: grid;
-      gap: 18px;
-    }
-
-    .glass {
-      border-radius: var(--radius-xl);
-      padding: 28px;
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-top: 14px;
-    }
-
-    .stat {
-      padding: 18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.72);
-      border: 1px solid rgba(17,24,39,0.05);
-    }
-
-    .stat-label {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .stat-value {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-    }
-
-    .mini-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .mini-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      color: var(--muted);
-      line-height: 1.5;
-      font-size: 14px;
-    }
-
-    .mini-item strong {
-      color: var(--text);
-      display: block;
-      margin-bottom: 2px;
-      font-size: 14px;
-    }
-
-    .check {
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      background: rgba(15,118,110,0.12);
-      color: var(--success);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      flex: 0 0 auto;
-      margin-top: 1px;
-    }
-
-    .section {
-      padding: 22px 0 14px;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 22px;
-    }
-
-    .section-kicker {
-      color: #4f46e5;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      line-height: 1.02;
-      letter-spacing: -0.04em;
-    }
-
-    .section-sub {
-      color: var(--muted);
-      max-width: 62ch;
-      line-height: 1.7;
-      font-size: 16px;
-      margin-top: 10px;
-    }
-
-    .providers {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .provider-card {
-      position: relative;
-      border-radius: 24px;
-      padding: 24px;
-      overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .provider-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-strong);
-    }
-
-    .provider-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .provider-badge {
-      display: inline-flex;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: #eef2ff;
-      color: #3730a3;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    .provider-rank {
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .provider-name {
-      margin: 20px 0 8px;
-      font-size: 26px;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-    }
-
-    .provider-desc {
-      color: var(--muted);
-      line-height: 1.65;
-      min-height: 76px;
-      font-size: 15px;
-    }
-
-    .meta {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin: 18px 0 22px;
-    }
-
-    .meta-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      border-top: 1px solid var(--line);
-      padding-top: 10px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .meta-row strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .provider-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .fine {
-      margin-top: 14px;
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 14px;
-    }
-
-    .info-card {
-      border-radius: 22px;
-      padding: 24px;
-    }
-
-    .info-num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      background: #111827;
-      color: white;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-
-    .info-title {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin-bottom: 8px;
-    }
-
-    .info-copy {
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 15px;
-    }
-
-    .faq-grid {
-      display: grid;
-      gap: 14px;
-      margin-top: 14px;
-    }
-
-    .faq-card {
-      border-radius: 20px;
-      padding: 22px 24px;
-    }
-
-    .faq-q {
-      font-size: 17px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    .faq-a {
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 15px;
-    }
-
-    .footer {
-      padding: 26px 0 60px;
-    }
-
-    .footer-card {
-      border-radius: 24px;
-      padding: 28px;
-    }
-
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: start;
-      margin-bottom: 18px;
-    }
-
-    .footer-brand {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-    }
-
-    .footer-copy,
-    .legal {
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 14px;
-      max-width: 74ch;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--line);
-      margin: 18px 0;
-    }
-
-    @media (max-width: 1080px) {
-      .hero-grid,
-      .providers,
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-card {
-        min-height: auto;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        padding-top: 38px;
-      }
-
-      .hero-card,
-      .glass,
-      .provider-card,
-      .info-card,
-      .faq-card,
-      .footer-card {
-        border-radius: 22px;
-      }
-
-      .hero-card {
-        padding: 28px 22px;
-      }
-
-      .glass,
-      .provider-card,
-      .info-card,
-      .faq-card,
-      .footer-card {
-        padding: 22px;
-      }
-
-      .section-head,
-      .footer-top {
-        display: block;
-      }
-
-      .hero-actions,
-      .provider-actions {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-      }
-    }
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Description" content="Compare online GLP-1 providers by pricing, speed, and experience. Informational comparison only.">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.3">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #0e121d; -webkit-text-stroke: #0e121d; min-height: 15.0px}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #0e121d; -webkit-text-stroke: #0e121d}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #535c72; -webkit-text-stroke: #535c72}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff; background-color: #0e121d}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #291b92; -webkit-text-stroke: #291b92; background-color: #3d28de; min-height: 16.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #291b92; -webkit-text-stroke: #291b92}
+    p.p8 {margin: 0.0px 0.0px 18.0px 0.0px; font: 18.0px 'Helvetica Neue'; color: #535c72; -webkit-text-stroke: #535c72}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #535c72; -webkit-text-stroke: #535c72}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #3d28de; -webkit-text-stroke: #3d28de}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #535c72; -webkit-text-stroke: #535c72}
+    p.p14 {margin: 0.0px 0.0px 0.0px 0.0px; font: 28.0px 'Helvetica Neue'; color: #0e121d; -webkit-text-stroke: #0e121d}
+    p.p15 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #13645b; -webkit-text-stroke: #13645b}
+    p.p16 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #0e121d; -webkit-text-stroke: #0e121d}
+    p.p18 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px 'Helvetica Neue'; color: #535c72; -webkit-text-stroke: #535c72; min-height: 18.0px}
+    p.p19 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #291b92; -webkit-text-stroke: #291b92}
+    p.p20 {margin: 0.0px 0.0px 0.0px 0.0px; font: 26.0px 'Helvetica Neue'; color: #0e121d; -webkit-text-stroke: #0e121d}
+    p.p21 {margin: 0.0px 0.0px 0.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #535c72; -webkit-text-stroke: #535c72}
+    p.p22 {margin: 0.0px 0.0px 0.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #0e121d; -webkit-text-stroke: #0e121d}
+    p.p23 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #535c72; -webkit-text-stroke: #535c72; min-height: 15.0px}
+    p.p24 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px 'Helvetica Neue'; color: #535c72; -webkit-text-stroke: #535c72}
+    p.p25 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
+    p.p26 {margin: 0.0px 0.0px 0.0px 0.0px; font: 20.0px 'Helvetica Neue'; color: #0e121d; -webkit-text-stroke: #0e121d}
+    p.p27 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Helvetica Neue'; color: #0e121d; -webkit-text-stroke: #0e121d}
+    p.p28 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #0e121d; -webkit-text-stroke: #0e121d; background-color: #0e121d; background-color: rgba(14, 18, 29, 0.078); min-height: 15.0px}
+    span.s1 {font-kerning: none}
+    span.s2 {font-kerning: none; background-color: rgba(244, 245, 250, 0.75)}
+    span.s3 {font-kerning: none; background-color: #eaeeff}
+    span.s4 {font-kerning: none; background-color: rgba(255, 255, 255, 0.76)}
+    span.s5 {font-kerning: none; background-color: #0e121d}
+    span.s6 {font: 12.0px 'Helvetica Neue'; font-kerning: none; color: #0e121d; background-color: rgba(255, 255, 255, 0.76); -webkit-text-stroke: 0px #0e121d}
+    span.s7 {font-kerning: none; color: #0e121d; background-color: rgba(255, 255, 255, 0.78); -webkit-text-stroke: 0px #0e121d}
+    span.s8 {font-kerning: none; background-color: rgba(255, 255, 255, 0.72)}
+    span.s9 {font-kerning: none; background-color: rgba(19, 100, 91, 0.12)}
+    span.s10 {font-kerning: none; color: #ffffff; background-color: #0e121d; -webkit-text-stroke: 0px #ffffff}
+    span.s11 {font: 12.0px 'Helvetica Neue'; font-kerning: none; background-color: rgba(255, 255, 255, 0.76)}
+    span.s12 {font-kerning: none; background-color: rgba(255, 255, 255, 0.78)}
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="shell nav">
-      <a href="#" class="brand">
-        <span class="brand-mark"></span>
-        <span>GLP1 Compare</span>
-      </a>
-
-      <nav class="nav-links">
-        <a href="#providers">Providers</a>
-        <a href="#how">How it works</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-
-      <a class="nav-cta" href="#providers">Compare now</a>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="shell hero-grid">
-        <div class="hero-card">
-          <div class="eyebrow">
-            <span class="dot"></span>
-            Informational comparison
-          </div>
-
-          <h1>Best online GLP-1 provider options.</h1>
-
-          <p class="hero-copy">
-            Compare online providers by pricing, process, and overall experience.
-            Built to help you review options clearly and quickly.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#providers">Compare providers</a>
-            <a class="btn btn-secondary" href="#how">How it works</a>
-          </div>
-
-          <div class="hero-note">
-            Information only. Not medical advice. Eligibility, prescribing, and treatment decisions depend on a licensed provider.
-          </div>
-        </div>
-
-        <div class="hero-side">
-          <div class="glass">
-            <div class="section-kicker" style="margin-bottom:8px;">Quick comparison</div>
-            <h2 style="font-size: 1.9rem;">A clean way to review your options.</h2>
-
-            <div class="stat-grid">
-              <div class="stat">
-                <div class="stat-label">Focus</div>
-                <div class="stat-value">Price</div>
-              </div>
-              <div class="stat">
-                <div class="stat-label">Focus</div>
-                <div class="stat-value">Speed</div>
-              </div>
-              <div class="stat">
-                <div class="stat-label">Focus</div>
-                <div class="stat-value">Ease</div>
-              </div>
-              <div class="stat">
-                <div class="stat-label">Focus</div>
-                <div class="stat-value">Fit</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="glass">
-            <div class="section-kicker" style="margin-bottom:8px;">What this site does</div>
-            <div class="mini-list">
-              <div class="mini-item">
-                <span class="check">✓</span>
-                <div>
-                  <strong>Compares provider options</strong>
-                  Reviews online provider choices side by side.
-                </div>
-              </div>
-              <div class="mini-item">
-                <span class="check">✓</span>
-                <div>
-                  <strong>Highlights key differences</strong>
-                  Focuses on pricing style, speed, and user experience.
-                </div>
-              </div>
-              <div class="mini-item">
-                <span class="check">✓</span>
-                <div>
-                  <strong>Keeps things simple</strong>
-                  Built for clarity, not hype.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="providers">
-      <div class="shell">
-        <div class="section-head">
-          <div>
-            <div class="section-kicker">Provider comparison</div>
-            <h2>Top GLP-1 provider options</h2>
-            <div class="section-sub">
-              Start with a simple side-by-side view. Replace the provider names and links below with your actual provider choices and affiliate links.
-            </div>
-          </div>
-        </div>
-
-        <div class="providers">
-          <article class="provider-card">
-            <div class="provider-top">
-              <span class="provider-badge">Best for speed</span>
-              <span class="provider-rank">Option 01</span>
-            </div>
-
-            <div class="provider-name">Provider One</div>
-            <div class="provider-desc">
-              Fast online intake and a simple overall process. Good for visitors who want a quick, straightforward path.
-            </div>
-
-            <div class="meta">
-              <div class="meta-row">
-                <span>Pricing style</span>
-                <strong>Varies</strong>
-              </div>
-              <div class="meta-row">
-                <span>Best fit</span>
-                <strong>Fast signup</strong>
-              </div>
-              <div class="meta-row">
-                <span>Process</span>
-                <strong>Online intake + review</strong>
-              </div>
-            </div>
-
-            <div class="provider-actions">
-              <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Check availability</a>
-              <a class="btn btn-secondary" href="#">Read review</a>
-            </div>
-
-            <div class="fine">
-              Replace this button link with your affiliate or provider link.
-            </div>
-          </article>
-
-          <article class="provider-card">
-            <div class="provider-top">
-              <span class="provider-badge">Best for cost</span>
-              <span class="provider-rank">Option 02</span>
-            </div>
-
-            <div class="provider-name">Provider Two</div>
-            <div class="provider-desc">
-              Position this one as the lower-cost or simpler-value option if that matches the provider you choose later.
-            </div>
-
-            <div class="meta">
-              <div class="meta-row">
-                <span>Pricing style</span>
-                <strong>Varies</strong>
-              </div>
-              <div class="meta-row">
-                <span>Best fit</span>
-                <strong>Budget-conscious</strong>
-              </div>
-              <div class="meta-row">
-                <span>Process</span>
-                <strong>Online intake + review</strong>
-              </div>
-            </div>
-
-            <div class="provider-actions">
-              <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Check availability</a>
-              <a class="btn btn-secondary" href="#">Read review</a>
-            </div>
-
-            <div class="fine">
-              Keep wording factual and simple. Avoid medical promises.
-            </div>
-          </article>
-
-          <article class="provider-card">
-            <div class="provider-top">
-              <span class="provider-badge">Best overall</span>
-              <span class="provider-rank">Option 03</span>
-            </div>
-
-            <div class="provider-name">Provider Three</div>
-            <div class="provider-desc">
-              Use this slot for the cleanest all-around option once you’ve picked actual providers and want to guide visitors toward one choice.
-            </div>
-
-            <div class="meta">
-              <div class="meta-row">
-                <span>Pricing style</span>
-                <strong>Varies</strong>
-              </div>
-              <div class="meta-row">
-                <span>Best fit</span>
-                <strong>Balanced option</strong>
-              </div>
-              <div class="meta-row">
-                <span>Process</span>
-                <strong>Online intake + review</strong>
-              </div>
-            </div>
-
-            <div class="provider-actions">
-              <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Check availability</a>
-              <a class="btn btn-secondary" href="#">Read review</a>
-            </div>
-
-            <div class="fine">
-              This can become your main conversion card later.
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="how">
-      <div class="shell">
-        <div class="section-head">
-          <div>
-            <div class="section-kicker">How it works</div>
-            <h2>A simple 3-step flow</h2>
-            <div class="section-sub">
-              Keep the journey obvious. The cleaner the path, the more legitimate the site feels.
-            </div>
-          </div>
-        </div>
-
-        <div class="info-grid">
-          <div class="info-card">
-            <div class="info-num">1</div>
-            <div class="info-title">Compare options</div>
-            <div class="info-copy">
-              Review providers based on price style, process, and the type of user each option may suit best.
-            </div>
-          </div>
-
-          <div class="info-card">
-            <div class="info-num">2</div>
-            <div class="info-title">Complete intake</div>
-            <div class="info-copy">
-              After choosing a provider, visitors complete the provider’s online intake and account setup flow.
-            </div>
-          </div>
-
-          <div class="info-card">
-            <div class="info-num">3</div>
-            <div class="info-title">Provider review</div>
-            <div class="info-copy">
-              Treatment eligibility, prescribing, and next steps depend on review by a licensed healthcare provider.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="faq">
-      <div class="shell">
-        <div class="section-head">
-          <div>
-            <div class="section-kicker">FAQ</div>
-            <h2>Common questions</h2>
-          </div>
-        </div>
-
-        <div class="faq-grid">
-          <div class="faq-card">
-            <div class="faq-q">What is this site?</div>
-            <div class="faq-a">
-              This site is an informational comparison page designed to help visitors review online GLP-1 provider options.
-            </div>
-          </div>
-
-          <div class="faq-card">
-            <div class="faq-q">Does this site provide medical advice?</div>
-            <div class="faq-a">
-              No. This site is for informational purposes only and does not provide medical advice, diagnosis, or treatment.
-            </div>
-          </div>
-
-          <div class="faq-card">
-            <div class="faq-q">Do I need insurance?</div>
-            <div class="faq-a">
-              Some providers may work with insurance while others may offer cash-pay options. That depends on the provider.
-            </div>
-          </div>
-
-          <div class="faq-card">
-            <div class="faq-q">How do I use this page?</div>
-            <div class="faq-a">
-              Compare the listed options, review the provider details, and click through to the provider that seems like the best fit.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="shell">
-      <div class="footer-card">
-        <div class="footer-top">
-          <div>
-            <div class="footer-brand">GLP1 Compare</div>
-          </div>
-          <a class="btn btn-primary" href="#providers" style="min-width: 180px;">Compare providers</a>
-        </div>
-
-        <div class="footer-copy">
-          This site is for informational purposes only. It does not provide medical advice, diagnosis, or treatment. Always consult a licensed healthcare professional regarding medical decisions.
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="legal">
-          © 2026 GLP1 Compare. All rights reserved.
-        </div>
-      </div>
-    </div>
-  </footer>
+<p class="p1"><span class="s1"><b></b></span><br></p>
+<p class="p2"><span class="s2"><b>GLP1 Compare</b><b></b></span></p>
+<p class="p3"><span class="s2">Providers</span></p>
+<p class="p3"><span class="s2">How it works</span></p>
+<p class="p3"><span class="s2">FAQ</span></p>
+<p class="p4"><span class="s1">Compare now</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s3">Informational comparison</span></p>
+<h1 style="margin: 0.0px 0.0px 0.0px 0.0px; font: 48.0px 'Helvetica Neue'; color: #0e121d; -webkit-text-stroke: #0e121d"><span class="s4"><b>Best online GLP-1 provider options.</b><b></b></span></h1>
+<p class="p8"><span class="s4">Compare online providers by pricing, process, and overall experience. Built to help you review options clearly and quickly.</span></p>
+<p class="p9"><span class="s5">Compare providers</span><span class="s6"> </span><span class="s7">How it works</span></p>
+<p class="p10"><span class="s4">Information only. Not medical advice. Eligibility, prescribing, and treatment decisions depend on a licensed provider.</span></p>
+<p class="p11"><span class="s4"><b>QUICK COMPARISON</b><b></b></span></p>
+<h2 style="margin: 0.0px 0.0px 0.0px 0.0px; font: 22.8px 'Helvetica Neue'; color: #0e121d; -webkit-text-stroke: #0e121d"><span class="s4"><b>A clean way to review your options.</b><b></b></span></h2>
+<p class="p13"><span class="s8">FOCUS</span></p>
+<p class="p14"><span class="s8"><b>Price</b><b></b></span></p>
+<p class="p13"><span class="s8">FOCUS</span></p>
+<p class="p14"><span class="s8"><b>Speed</b><b></b></span></p>
+<p class="p13"><span class="s8">FOCUS</span></p>
+<p class="p14"><span class="s8"><b>Ease</b><b></b></span></p>
+<p class="p13"><span class="s8">FOCUS</span></p>
+<p class="p14"><span class="s8"><b>Fit</b><b></b></span></p>
+<p class="p11"><span class="s4"><b>WHAT THIS SITE DOES</b><b></b></span></p>
+<p class="p15"><span class="s9"><b>✓</b><b></b></span></p>
+<p class="p16"><span class="s4"><b>Compares provider options</b><b></b></span></p>
+<p class="p3"><span class="s4">Reviews online provider choices side by side.</span></p>
+<p class="p15"><span class="s9"><b>✓</b><b></b></span></p>
+<p class="p16"><span class="s4"><b>Highlights key differences</b><b></b></span></p>
+<p class="p3"><span class="s4">Focuses on pricing style, speed, and user experience.</span></p>
+<p class="p15"><span class="s9"><b>✓</b><b></b></span></p>
+<p class="p16"><span class="s4"><b>Keeps things simple</b><b></b></span></p>
+<p class="p3"><span class="s4">Built for clarity, not hype.</span></p>
+<p class="p11"><span class="s1"><b>PROVIDER COMPARISON</b></span></p>
+<h2 style="margin: 0.0px 0.0px 0.0px 0.0px; font: 32.0px 'Helvetica Neue'; color: #0e121d; -webkit-text-stroke: #0e121d"><span class="s1"><b>Top GLP-1 provider options</b></span></h2>
+<p class="p18"><span class="s1"></span><br></p>
+<p class="p19"><span class="s3"><b>Best for speed</b><b></b></span></p>
+<p class="p13"><span class="s4"><b>OPTION 01</b><b></b></span></p>
+<p class="p20"><span class="s4"><b>Ro (Body Program)</b><b></b></span></p>
+<p class="p21"><span class="s4">Well-known telehealth platform with a streamlined signup process and strong brand trust.</span></p>
+<p class="p3"><span class="s4">Pricing style</span></p>
+<p class="p16"><span class="s4">Mid-high</span></p>
+<p class="p3"><span class="s4">Best fit</span></p>
+<p class="p16"><span class="s4">Convenience &amp; brand trust</span></p>
+<p class="p3"><span class="s4">Process</span></p>
+<p class="p16"><span class="s4">Guided online process</span></p>
+<p class="p22"><span class="s10">Get started</span><span class="s11"> </span><span class="s12">Read review</span></p>
+<p class="p23"><span class="s1"></span><br></p>
+<p class="p19"><span class="s3"><b>Best for cost</b><b></b></span></p>
+<p class="p13"><span class="s4"><b>OPTION 02</b><b></b></span></p>
+<p class="p20"><span class="s4"><b>Henry Meds</b><b></b></span></p>
+<p class="p21"><span class="s4">Popular option focused on affordability, often chosen by users looking for lower-cost access.</span></p>
+<p class="p3"><span class="s4">Pricing style</span></p>
+<p class="p16"><span class="s4">Lower cost</span></p>
+<p class="p3"><span class="s4">Best fit</span></p>
+<p class="p16"><span class="s4">Affordability</span></p>
+<p class="p3"><span class="s4">Process</span></p>
+<p class="p16"><span class="s4">Online intake + review</span></p>
+<p class="p22"><span class="s10">Get started</span><span class="s12"> Read review</span></p>
+<p class="p23"><span class="s1"></span><br></p>
+<p class="p19"><span class="s3"><b>Best overall</b><b></b></span></p>
+<p class="p13"><span class="s4"><b>OPTION 03</b><b></b></span></p>
+<p class="p20"><span class="s4"><b>Found</b><b></b></span></p>
+<p class="p21"><span class="s4">Popular option focused on affordability, often chosen by users looking for lower-cost access.</span></p>
+<p class="p3"><span class="s4">Pricing style</span></p>
+<p class="p16"><span class="s4">Varies</span></p>
+<p class="p3"><span class="s4">Best fit</span></p>
+<p class="p16"><span class="s4">Coaching &amp; support</span></p>
+<p class="p3"><span class="s4">Process</span></p>
+<p class="p16"><span class="s4">Online intake + review</span></p>
+<p class="p22"><span class="s10">Get started</span><span class="s11"> </span><span class="s12">Read review</span></p>
+<p class="p23"><span class="s1"></span><br></p>
+<p class="p11"><span class="s1"><b>HOW IT WORKS</b></span></p>
+<h2 style="margin: 0.0px 0.0px 0.0px 0.0px; font: 32.0px 'Helvetica Neue'; color: #0e121d; -webkit-text-stroke: #0e121d"><span class="s1"><b>A simple 3-step flow</b></span></h2>
+<p class="p24"><span class="s1">Compare providers, choose the option that fits your needs, and complete the provider’s online intake process.</span></p>
+<p class="p25"><span class="s5"><b>1</b><b></b></span></p>
+<p class="p26"><span class="s4"><b>Compare options</b><b></b></span></p>
+<p class="p21"><span class="s4">Review providers based on price style, process, and overall experience.</span></p>
+<p class="p25"><span class="s5"><b>2</b><b></b></span></p>
+<p class="p26"><span class="s4"><b>Complete intake</b><b></b></span></p>
+<p class="p21"><span class="s4">Choose the provider that best fits your goals and continue to their secure online intake form.</span></p>
+<p class="p25"><span class="s5"><b>3</b><b></b></span></p>
+<p class="p26"><span class="s4"><b>Provider review</b><b></b></span></p>
+<p class="p21"><span class="s4">A licensed healthcare provider will review your information and determine whether treatment is appropriate.</span></p>
+<p class="p11"><span class="s1"><b>FAQ</b></span></p>
+<h2 style="margin: 0.0px 0.0px 0.0px 0.0px; font: 32.0px 'Helvetica Neue'; color: #0e121d; -webkit-text-stroke: #0e121d"><span class="s1"><b>Common questions</b></span></h2>
+<p class="p27"><span class="s4"><b>What is this site?</b><b></b></span></p>
+<p class="p21"><span class="s4">This site is an informational comparison page designed to help visitors review online GLP-1 provider options.</span></p>
+<p class="p27"><span class="s4"><b>Does this site provide medical advice?</b><b></b></span></p>
+<p class="p21"><span class="s4">No. This site is for informational purposes only and does not provide medical advice, diagnosis, or treatment.</span></p>
+<p class="p27"><span class="s4"><b>Do I need insurance?</b><b></b></span></p>
+<p class="p21"><span class="s4">Some providers may work with insurance while others may offer cash-pay options. That depends on the provider.</span></p>
+<p class="p27"><span class="s4"><b>How do I use this page?</b><b></b></span></p>
+<p class="p21"><span class="s4">Compare the listed options, review the provider details, and click through to the provider that seems like the best fit.</span></p>
+<p class="p26"><span class="s4"><b>GLP1 Compare</b><b></b></span></p>
+<p class="p9"><span class="s5">Compare providers</span></p>
+<p class="p3"><span class="s4">This site is for informational purposes only. It does not provide medical advice, diagnosis, or treatment. Always consult a licensed healthcare professional regarding medical decisions.</span></p>
+<p class="p28"><span class="s1"></span><br></p>
+<p class="p3"><span class="s4">© 2026 GLP1 Compare. All rights reserved.</span></p>
 </body>
 </html>
